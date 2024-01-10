@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyleComponents = {
+const HomeStyleComponents = {
   Wrapper: styled.section`
     display: flex;
     flex-direction: column;
@@ -32,3 +32,5 @@ export const StyleComponents = {
     color: #000;
   `,
 };
+
+export default HomeStyleComponents;

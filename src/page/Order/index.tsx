@@ -1,7 +1,14 @@
-import React from 'react';
+import Layout from '../../components/Layout';
+import BillContainer from '../../Container/BillContainer';
+import ProductContainer from '../../Container/ProductContainer';
 
-const index = () => {
-  return <div></div>;
+const Order = () => {
+  return (
+    <Layout header>
+      <ProductContainer />
+      <BillContainer />
+    </Layout>
+  );
 };
 
-export default index;
+export default Order;

@@ -1,30 +1,4 @@
-# 과제 실행 전
-
-## [ 로컬 서버 세팅 ]
-
-1. /src/db 경로에 db.json 파일을 생성해주세요.
-   해당 파일에 하단 데이터(붙임 1 참조)를 붙여넣기 한 후 저장해주세요.
-2. ‘json-server’ 패키지를 설치해 주세요.(https://www.npmjs.com/package/json-server)
-3. package.json - scripts 가장 하단에 아래 코드를 넣으신 뒤, 커맨드를 실행해주세요.
-4. "server": "json-server --watch ./src/db/db.json --port 3001"
-5. command: npm run server
-6. 세팅된 서버를 활용해 과제를 진행해주세요.(3001번 포트)
-
 # 요구 사항(필수)
-
-## [ 프로젝트 구성 ]
-
-1. Create React App을 사용해 세팅해주세요. Next.js 를 사용하셔도 됩니다.
-2. 모바일 웹 기준으로 구현해 주세요.(Chrome 브라우저에서 정상적으로 실행되어야 합니다.)
-3. 전역 상태관리 라이브러리를 사용해 주세요.
-   Redux, Redux-toolkit, Jotai, Recoil, Zustand, React Context API 등
-4. 스타일링
-   완성된 UI 라이브러리는 사용할 수 없습니다.(bootstrap, material-ui 등)
-   CSS-in-JS는 사용 가능합니다.(emotion, styled-component 등)
-
-## [ 홈 ]
-
-버튼을 클릭하면 /order 페이지로 이동해야 합니다.
 
 ## [ /order ]
 
@@ -39,6 +13,26 @@
 9. 주문 아이템의 합계 수량이 0일 때는 주문할 수 없습니다.
 10. 수량이 1 이상인 아이템의 배경색을 바꿔 주세요.
 11. 주문하기 클릭 후 로딩 중인 상태를 하단 버튼에 표시해 주세요.
+
+### 상태구성 - 주문정보
+
+```
+{
+  "id": "39843-2",
+  "name": "A 벽지",
+  "event": 1,
+  "materialType": 1,
+  "price": 100000
+}
+```
+
+1. items : api 요청시 응답받을 item 상태, loading 상태
+2. 주문서 : id 넘버링 별 count, 총합 price, 주문정보를 서버에 전달하는 loading state , 주문 성공/실패 여부 state
+   - 선택중인 item이라면 background color 변화 -> 주문서 상태의 id와 비교하여 구현.
+
+### loading state
+
+주문 발주 -> 주문 완료 버튼으로 넘어가기 위한 state
 
 ## [ /complete, /error ]
 
@@ -61,7 +55,7 @@ Typescript를 사용하셔도 됩니다.
 ## 리드미
 
 - 스타일은 figma 에 나온 양식을 따랏습니다.
--
+- 주문의 상태와 선택한 상품의 상태를 합치는게 좋은건지 고민
 
 # todo
 
