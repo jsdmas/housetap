@@ -1,5 +1,9 @@
+import './style/reset.css';
+
+import Router from './Router';
+
 const App = () => {
-  return <div>hi</div>;
+  return <Router />;
 };
 
 export default App;
