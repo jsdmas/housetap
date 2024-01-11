@@ -1,5 +1,6 @@
 const INCREASE_SELECTITEM = 'selectItem/INCREASE_SELECTITEM' as const;
 const DECREASE_SELECTITEM = 'selectItem/DECREASE_SELECTITEM' as const;
+const CLEAR_SELECTITEM = 'selectItem/CLEAR_SELECTITEM' as const;
 
 export const increaseSelectItem = (productId: string, productPrice: number) => ({
   type: INCREASE_SELECTITEM,
@@ -9,10 +10,12 @@ export const decreaseSelectItem = (productId: string) => ({
   type: DECREASE_SELECTITEM,
   payload: productId,
 });
+export const clearSelectItem = () => ({ type: CLEAR_SELECTITEM });
 
 type SelectItemAction =
   | ReturnType<typeof increaseSelectItem>
-  | ReturnType<typeof decreaseSelectItem>;
+  | ReturnType<typeof decreaseSelectItem>
+  | ReturnType<typeof clearSelectItem>;
 
 export type SelectItemState = {
   [productId: string]: { count: number; price: number };
@@ -38,6 +41,8 @@ function selectItemReducer(state: SelectItemState = initialState, action: Select
           price: state[action.payload]?.price,
         },
       };
+    case CLEAR_SELECTITEM:
+      return {};
     default:
       return state;
   }

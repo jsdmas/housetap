@@ -31,7 +31,7 @@ const BillStyleComponents = {
     line-height: 22px;
   `,
 
-  Button: styled.button<{ $ItemLoading: boolean }>`
+  Button: styled.button<{ $ItemLoading: boolean; $totalCount: number; $billLoading: boolean }>`
     cursor: pointer;
     width: 301px;
     height: 47.92px;
@@ -41,7 +41,8 @@ const BillStyleComponents = {
     font-size: 18px;
     line-height: 22px;
     color: #ffffff;
-    background-color: ${(props) => (props.$ItemLoading ? '#C1C1C1' : '#000')};
+    background-color: ${(props) =>
+      props.$ItemLoading || props.$totalCount <= 0 || props.$billLoading ? '#C1C1C1' : '#000'};
     border: none;
   `,
 };

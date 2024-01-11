@@ -26,9 +26,9 @@ const initialState: BillState = {
 function billReducer(state: BillState = initialState, action: BillAction) {
   switch (action.type) {
     case SET_TOTAL_COUNT:
-      return { ...state, totalCount: action.payload };
+      return { ...state, totalCount: Math.max(0, action.payload) };
     case SET_TOTAL_PAYMENT:
-      return { ...state, totalPayment: action.payload };
+      return { ...state, totalPayment: Math.max(0, action.payload) };
     case SET_BILL_LOADING:
       return { ...state, billLoading: action.payload };
     default:
