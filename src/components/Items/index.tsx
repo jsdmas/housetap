@@ -1,12 +1,26 @@
-import { priceConversion } from '../../util';
+import { useEffect } from 'react';
+
+import { countCalculator, paymentCalculator, priceConversion } from '../../utils';
 import S from './style';
 import { ItemsProps } from './type';
 
-const Items = ({ items, increaseItem, decreaseItem, selectItemList }: ItemsProps) => {
+const Items = ({
+  items,
+  increaseItem,
+  decreaseItem,
+  selectItemList,
+  updateTotalProductCount,
+  updateTotalProductPayment,
+}: ItemsProps) => {
+  useEffect(() => {
+    updateTotalProductCount(countCalculator(selectItemList));
+    updateTotalProductPayment(paymentCalculator(selectItemList));
+  }, [updateTotalProductPayment, updateTotalProductCount, selectItemList]);
+
   return (
     <S.Wrapper>
       {items?.map(({ id, name, event, price }) => (
-        <S.Item key={id} $selectIdCount={selectItemList[id]}>
+        <S.Item key={id} $selectIdCount={selectItemList[id]?.count}>
           <S.MockImg />
           <S.Info>
             <S.Top>
@@ -16,8 +30,8 @@ const Items = ({ items, increaseItem, decreaseItem, selectItemList }: ItemsProps
             <S.Bottom>
               <S.Count>
                 <S.Button onClick={() => decreaseItem(id)}>-</S.Button>
-                <S.Number>{selectItemList[id] ? selectItemList[id] : 0}</S.Number>
-                <S.Button onClick={() => increaseItem(id)}>+</S.Button>
+                <S.Number>{selectItemList[id]?.count ?? 0}</S.Number>
+                <S.Button onClick={() => increaseItem(id, price)}>+</S.Button>
               </S.Count>
               <S.Price>{priceConversion(price)}</S.Price>
             </S.Bottom>

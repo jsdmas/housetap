@@ -1,3 +1,4 @@
+import { priceConversion } from '../../utils';
 import S from './style';
 import { BillProps } from './type';
 
@@ -6,7 +7,7 @@ const Bill = ({ productLoading, totalCount, totalPayment, billLoading }: BillPro
     <S.Wrapper>
       <S.Items>
         <S.Item>총 수량 : {totalCount}개</S.Item>
-        <S.Item>총 가격 : {totalPayment}원</S.Item>
+        <S.Item>총 가격 : {priceConversion(totalPayment)}</S.Item>
       </S.Items>
       <S.Button disabled={productLoading} $ItemLoading={productLoading}>
         주문하기

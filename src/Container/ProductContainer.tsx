@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getProductData } from '../api';
 import Items from '../components/Items';
 import { RootState } from '../store';
+import { setTotalCount, setTotalPayment } from '../store/bill';
 import { setProduct, setProductLoading } from '../store/product';
 import { decreaseSelectItem, increaseSelectItem } from '../store/selectItem';
 import { Product } from '../types';
@@ -14,12 +15,20 @@ const ProductContainer = () => {
   const selectItemList = useSelector((state: RootState) => state.selectItemReducer);
   const dispatch = useDispatch();
 
-  const increaseItem = (productId: string) => {
-    dispatch(increaseSelectItem(productId));
+  const increaseItem = (productId: string, productPrice: number) => {
+    dispatch(increaseSelectItem(productId, productPrice));
   };
 
   const decreaseItem = (productId: string) => {
     dispatch(decreaseSelectItem(productId));
+  };
+
+  const updateTotalProductCount = (productCount: number) => {
+    dispatch(setTotalCount(productCount));
+  };
+
+  const updateTotalProductPayment = (productPayment: number) => {
+    dispatch(setTotalPayment(productPayment));
   };
 
   useEffect(() => {
@@ -46,6 +55,8 @@ const ProductContainer = () => {
           increaseItem={increaseItem}
           decreaseItem={decreaseItem}
           selectItemList={selectItemList}
+          updateTotalProductCount={updateTotalProductCount}
+          updateTotalProductPayment={updateTotalProductPayment}
         />
       )}
     </>

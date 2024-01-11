@@ -10,12 +10,13 @@ const ItemStyleComponents = {
     gap: 20px;
     padding-bottom: 190px;
   `,
-  Item: styled.li<{ $selectIdCount: number }>`
+  Item: styled.li<{ $selectIdCount?: number }>`
     width: 301px;
     height: 80px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 15px;
-    background-color: ${(props) => (props.$selectIdCount > 0 ? 'rgba(247, 90, 47, 0.1)' : '')};
+    background-color: ${(props) =>
+      (props.$selectIdCount || 0) > 0 ? 'rgba(247, 90, 47, 0.1)' : ''};
     display: flex;
     align-items: center;
     justify-content: space-between;

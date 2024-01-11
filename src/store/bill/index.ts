@@ -1,20 +1,14 @@
-const INCREASE_COUNT = 'bill/INCREASE_COUNT' as const;
-const DECREASE_COUNT = 'bill/INCREASE_COUNT' as const;
-const INCREASE_PAYMENT = 'bill/INCREASE_PAYMENT' as const;
-const DECREASE_PAYMENT = 'bill/DECREASE_PAYMENT' as const;
+const SET_TOTAL_COUNT = 'bill/SET_TOTAL_COUNT' as const;
+const SET_TOTAL_PAYMENT = 'bill/SET_TOTAL_PAYMENT' as const;
 const SET_BILL_LOADING = 'bill/SET_BILL_LOADING' as const;
 
-export const increaseCount = (diff: number) => ({ type: INCREASE_COUNT, payload: diff });
-export const decreaseCount = (diff: number) => ({ type: DECREASE_COUNT, payload: diff });
-export const increasePayment = (diff: number) => ({ type: INCREASE_PAYMENT, payload: diff });
-export const decreasePayment = (diff: number) => ({ type: DECREASE_PAYMENT, payload: diff });
+export const setTotalCount = (diff: number) => ({ type: SET_TOTAL_COUNT, payload: diff });
+export const setTotalPayment = (diff: number) => ({ type: SET_TOTAL_PAYMENT, payload: diff });
 export const setBillLoading = (diff: boolean) => ({ type: SET_BILL_LOADING, payload: diff });
 
 type BillAction =
-  | ReturnType<typeof decreaseCount>
-  | ReturnType<typeof increaseCount>
-  | ReturnType<typeof increasePayment>
-  | ReturnType<typeof decreasePayment>
+  | ReturnType<typeof setTotalCount>
+  | ReturnType<typeof setTotalPayment>
   | ReturnType<typeof setBillLoading>;
 
 type BillState = {
@@ -31,14 +25,10 @@ const initialState: BillState = {
 
 function billReducer(state: BillState = initialState, action: BillAction) {
   switch (action.type) {
-    case INCREASE_COUNT:
-      return { ...state, totalCount: state.totalCount + action.payload };
-    case DECREASE_COUNT:
-      return { ...state, totalCount: state.totalCount - action.payload };
-    case INCREASE_PAYMENT:
-      return { ...state, totalPayment: state.totalPayment + action.payload };
-    case DECREASE_PAYMENT:
-      return { ...state, totalPayment: state.totalPayment - action.payload };
+    case SET_TOTAL_COUNT:
+      return { ...state, totalCount: action.payload };
+    case SET_TOTAL_PAYMENT:
+      return { ...state, totalPayment: action.payload };
     case SET_BILL_LOADING:
       return { ...state, billLoading: action.payload };
     default:
