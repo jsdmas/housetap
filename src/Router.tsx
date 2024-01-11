@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Spinner from './components/Spinner';
 import { PATH } from './constants/path';
 
-const Home = lazy(() => import('./page/Home'));
-const Order = lazy(() => import('./page/Order'));
-const Complete = lazy(() => import('./page/Complete'));
-const Error = lazy(() => import('./page/Error'));
+const Home = lazy(() => import('./pages/Home'));
+const Order = lazy(() => import('./pages/Order'));
+const Complete = lazy(() => import('./pages/Complete'));
+const Error = lazy(() => import('./pages/Error'));
 
 const Router = () => {
   return (
