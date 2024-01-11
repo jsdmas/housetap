@@ -1,33 +1,30 @@
-import styled from 'styled-components';
+import { priceConversion } from '../../util';
+import S from './style';
+import { ItemsProps } from './type';
 
-import { Product } from '../../types';
-
-interface ItemsProps {
-  items: Product[] | null;
-}
-
-const Wrapper = styled.ul`
-  padding-top: 80px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  place-items: center;
-  gap: 20px;
-  padding-bottom: 190px;
-`;
-
-const Item = styled.li`
-  width: 301px;
-  height: 80px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-`;
-
-const Items = ({ items }: ItemsProps) => {
+const Items = ({ items, increaseItem, decreaseItem, selectItemList }: ItemsProps) => {
   return (
-    <Wrapper>
-      {items?.map(({ id, name, event, materialType, price }) => <Item key={id}>{name}</Item>)}
-    </Wrapper>
+    <S.Wrapper>
+      {items?.map(({ id, name, event, price }) => (
+        <S.Item key={id} $selectIdCount={selectItemList[id]}>
+          <S.MockImg />
+          <S.Info>
+            <S.Top>
+              <S.Name>{name}</S.Name>
+              {event ? <S.Event>이벤트</S.Event> : null}
+            </S.Top>
+            <S.Bottom>
+              <S.Count>
+                <S.Button onClick={() => decreaseItem(id)}>-</S.Button>
+                <S.Number>{selectItemList[id] ? selectItemList[id] : 0}</S.Number>
+                <S.Button onClick={() => increaseItem(id)}>+</S.Button>
+              </S.Count>
+              <S.Price>{priceConversion(price)}</S.Price>
+            </S.Bottom>
+          </S.Info>
+        </S.Item>
+      ))}
+    </S.Wrapper>
   );
 };
 

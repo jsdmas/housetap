@@ -20,12 +20,12 @@ type ProductState = {
   loading: true;
 };
 
-const initalState: ProductState = {
+const initialState: ProductState = {
   items: null,
   loading: true,
 };
 
-function productReducer(state: ProductState = initalState, action: ProductAction) {
+function productReducer(state: ProductState = initialState, action: ProductAction) {
   switch (action.type) {
     case SET_PRODUCT:
       return { ...state, items: action.payload };

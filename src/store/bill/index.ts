@@ -23,13 +23,13 @@ type BillState = {
   billLoading: boolean;
 };
 
-const initalState: BillState = {
+const initialState: BillState = {
   totalCount: 0,
   totalPayment: 0,
   billLoading: false,
 };
 
-function billReducer(state: BillState = initalState, action: BillAction) {
+function billReducer(state: BillState = initialState, action: BillAction) {
   switch (action.type) {
     case INCREASE_COUNT:
       return { ...state, totalCount: state.totalCount + action.payload };

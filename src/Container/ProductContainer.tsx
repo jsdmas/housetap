@@ -6,11 +6,21 @@ import { getProductData } from '../api';
 import Items from '../components/Items';
 import { RootState } from '../store';
 import { setProduct, setProductLoading } from '../store/product';
+import { decreaseSelectItem, increaseSelectItem } from '../store/selectItem';
 import { Product } from '../types';
 
 const ProductContainer = () => {
-  const { loading, items } = useSelector((state: RootState) => state.productReducer);
+  const { loading, items: products } = useSelector((state: RootState) => state.productReducer);
+  const selectItemList = useSelector((state: RootState) => state.selectItemReducer);
   const dispatch = useDispatch();
+
+  const increaseItem = (productId: string) => {
+    dispatch(increaseSelectItem(productId));
+  };
+
+  const decreaseItem = (productId: string) => {
+    dispatch(decreaseSelectItem(productId));
+  };
 
   useEffect(() => {
     (async () => {
@@ -27,7 +37,18 @@ const ProductContainer = () => {
   }, [dispatch]);
 
   return (
-    <>{loading ? <LoadingText>목록을 불러오고 있습니다.</LoadingText> : <Items items={items} />}</>
+    <>
+      {loading ? (
+        <LoadingText>목록을 불러오고 있습니다.</LoadingText>
+      ) : (
+        <Items
+          items={products}
+          increaseItem={increaseItem}
+          decreaseItem={decreaseItem}
+          selectItemList={selectItemList}
+        />
+      )}
+    </>
   );
 };
 
