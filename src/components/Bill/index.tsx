@@ -15,13 +15,27 @@ const Bill = ({
 }: BillProps) => {
   const navigate = useNavigate();
 
-  const submitOrder = () => {
-    submitOrderLoading(true);
-    setTimeout(() => {
+  const submitOrder = async () => {
+    try {
+      submitOrderLoading(true);
+      const result = await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // 실패화면 이동시 reject 호출.
+          resolve(true);
+          // reject('주문 실패!');
+        }, 1500);
+      });
+
+      if (result) {
+        navigate(PATH.COMPLETE);
+      }
+    } catch (err) {
+      console.error(err);
+      navigate(PATH.ERROR);
+    } finally {
       submitOrderLoading(false);
-      navigate(PATH.COMPLETE);
       deleteSelectItem();
-    }, 1500);
+    }
   };
 
   return (

@@ -7,7 +7,7 @@ export function priceConversion(price: number) {
 export function countCalculator(selectItemList: SelectItemState) {
   let totalCount = 0;
 
-  for (const [key, value] of Object.entries(selectItemList)) {
+  for (const [, value] of Object.entries(selectItemList)) {
     totalCount += value.count;
   }
 
@@ -17,8 +17,10 @@ export function countCalculator(selectItemList: SelectItemState) {
 export function paymentCalculator(selectItemList: SelectItemState) {
   let totalPrice = 0;
 
-  for (const [key, value] of Object.entries(selectItemList)) {
-    totalPrice += value.count * value.price;
+  for (const [, value] of Object.entries(selectItemList)) {
+    if (!isNaN(value.price)) {
+      totalPrice += value.count * value.price;
+    }
   }
 
   return totalPrice;

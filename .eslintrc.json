@@ -26,6 +26,8 @@
     "jsx-a11y"
   ],
   "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "react/react-in-jsx-scope": "off",
     "import/no-anonymous-default-export": "off",
     "import/newline-after-import": "error",

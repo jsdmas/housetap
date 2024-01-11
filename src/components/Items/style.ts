@@ -69,10 +69,6 @@ const ItemStyleComponents = {
     border: none;
     font-size: large;
     cursor: pointer;
-    &:hover {
-      background-color: black;
-      color: white;
-    }
   `,
   Number: styled.span`
     padding: 0px 5px;
